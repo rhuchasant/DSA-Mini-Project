@@ -1,0 +1,134 @@
+//the lalltest value is shown in all the iterations
+
+
+import java.util.*;
+
+class cityNode{
+	int cityNo;
+	//String cityName;
+	cityNode next;
+	
+	public cityNode(int v) {
+		this.cityNo=v;
+		//this.cityName=v.cityName;
+		this.next=null;
+	}
+	
+}
+
+class restLoc{
+	int restNo;
+	restLoc next;
+	
+	public restLoc(int i) {
+		this.restNo=i;
+		this.next=null;
+	}
+}
+
+class petrolPump{
+	int ppNo;
+	petrolPump next;
+	
+	public petrolPump(int i) {
+		this.ppNo=i;
+		this.next=null;
+	}
+}
+
+class creation{
+	
+	int locations[]=new int[2];
+	Scanner sc = new Scanner(System.in);
+    cityNode head[] = new cityNode[21]; // number of heads for creating adjacency list
+    int c=20;// number of vertices total in graph
+    int e=22;// number of edges
+    
+    //for matrix representation
+    int adjMatrix[][];
+	
+	public int[] edgeCreate(int u,int v,int r,int pp) {
+		
+        cityNode temp = new cityNode(v);
+        if (head[u]==null) {//ie.for the first iteration we will create u node and since the
+        	//array will be empty so we will add in the head node
+        	head[u]=temp;
+        }
+
+        else {
+            cityNode curr = head[u]; // node created for traversal
+            while (curr.next != null &&  curr!=null) {
+                curr = curr.next;
+            }
+            curr.next = temp; // added the new node at the last of linked list
+        }
+        
+        //System.out.println("no of rest locations: "+r);
+        //System.out.println("no of petrol pumps: "+pp);
+       
+        locations[0]=r;
+        locations[1]=pp;
+        return locations;
+    }
+	
+	 public void displayList() {
+	    	System.out.println("Paths Available: ");
+	        for (int i = 1; i <=c; i++) {
+	            cityNode curr = head[i];
+	            System.out.print(i + " ");
+	            while (curr != null) {
+	                System.out.print("--> " + curr.cityNo);
+	                curr = curr.next;
+	            }
+	            int [] newLoc=new int[2];
+	            newLoc[0]=locations[0];
+	            newLoc[1]=locations[1];
+	            System.out.println();
+	            System.out.println(newLoc[0]+" rest locations");
+	            System.out.println(newLoc[1]+" petrol pump locations");
+	           
+	            System.out.println();
+	        }
+	    }
+	 
+	 public void allCreate() {
+		 System.out.println("1: PUNE");
+	     System.out.println("2. BANGALORE");
+	     System.out.println("3. DELHI");
+	     System.out.println("4. KOLKATA");
+	     System.out.println("5. CHENNAI");
+	     System.out.println("6. LUCKNOW");
+		 cityNode c1=new cityNode(1);
+		 cityNode c2=new cityNode(2);
+		 cityNode c3=new cityNode(3);
+		 cityNode c4=new cityNode(4);
+		 cityNode c5=new cityNode(5);
+		 cityNode c6=new cityNode(6);
+		 petrolPump p1=new petrolPump(1);
+		 petrolPump p2=new petrolPump(2);
+		 restLoc r1=new restLoc(1);
+		 
+		 edgeCreate(c1.cityNo,c4.cityNo,1,7);
+		 edgeCreate(c1.cityNo,c2.cityNo,3,2);
+		 
+		 
+	 }
+	
+	
+	
+	
+
+}
+
+
+public class graphCreated {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+	
+		creation cr=new creation();
+		cr.allCreate();
+		cr.displayList();
+	}
+
+}
