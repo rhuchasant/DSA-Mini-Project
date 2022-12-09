@@ -1,0 +1,89 @@
+import java.util.*;
+
+class cityNode{
+	int cityNo;
+	String cityName;
+	cityNode next;
+	
+	public cityNode(cityNode v) {
+		this.cityNo=v.cityNo;
+		this.cityName=v.cityName;
+		this.next=null;
+	}
+	
+	public cityNode(int cityNo,String cityName) {
+		this.cityNo=cityNo;
+		this.cityName=cityName;
+		this.next=null;
+	}
+}
+
+class creation{
+	
+	
+	Scanner sc = new Scanner(System.in);
+    cityNode head[] = new cityNode[12]; // number of heads for creating adjacency list
+    int c=11;// number of vertices total in graph
+    int e=13;// number of edges
+    
+  
+	
+	public void edgeCreate(cityNode u,cityNode v) {
+		cityNode temp = new cityNode(v);
+        for(int i=0;i<12;i++) {
+        	
+            if (head[0]==null) {//ie.for the first iteration we will create u node and since the
+            	//array will be empty so we will add in the head node
+            	head[0]=temp;
+            	System.out.println(head[0].cityName+"**");
+            }
+
+            else {
+                cityNode curr = head[i]; // node created for traversal
+                while (curr!= null) {
+                    curr = curr.next;
+                }
+                curr.next = temp; // added the new node at the last of linked list
+            }
+        }
+    }
+	
+	 public void displayList() {
+	    	System.out.println("Paths Available: ");
+	        for (int i = 1; i <=c; i++) {
+	            cityNode curr = head[i];
+	            System.out.print(i + " ");
+	            while (curr != null) {
+	                System.out.print("--> " + curr.cityNo);
+	                curr = curr.next;
+	            }
+	            System.out.println();
+	        }
+	    }
+	 
+	 public void allCreate() {
+
+		 cityNode c1=new cityNode(1,"pune");
+		 cityNode c2=new cityNode(2,"bangalore");
+		 cityNode c3=new cityNode(3,"delhi");
+		 cityNode c4=new cityNode(4,"indore");
+		 cityNode c5=new cityNode(5,"kashmir");
+		 
+		 edgeCreate(c1,c2);
+		 edgeCreate(c1,c4);
+		 edgeCreate(c2,c3);
+	
+	 }
+}
+
+public class graphCreated {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+	
+		creation cr=new creation();
+		cr.allCreate();
+		cr.displayList();
+	}
+
+}
